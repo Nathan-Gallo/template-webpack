@@ -1,9 +1,9 @@
 <script>
-    export let book = {};
+  export let book = {};
 
-    function isValidUrl(url) {
-        return url && /http.+\.(jpg|png|gif)$/.test(url);
-    }
+  function isValidUrl(url) {
+    return url && /http.+\.(jpg|png|gif)$/.test(url);
+  }
 </script>
 
 <style>
@@ -92,24 +92,16 @@
     letter-spacing: 0.25em;
     margin-left: calc(10% + var(--spacingSmall));
   }
-
-
 </style>
+
 <a
-    href="#"
-    class="book book--interactive book--variation-{book.variation} {isValidUrl(
-        book.cover
-    )
-        ? 'book--cover'
-        : 'book--no-cover'}"
->
-    <span
-        class="cover"
-        style={isValidUrl(book.cover)
-            ? "background-image: url" + book.cover + ")"
-            : ""}
-    >
-        <span class="title">{book.title || ""}</span>
-        <span class="author">{book.author || ""}</span>
-    </span>
+  href="#"
+  class="book book--interactive book--variation-{book.variation}
+  {isValidUrl(book.cover) ? 'book--cover' : 'book--no-cover'}">
+  <span
+    class="cover"
+    style={isValidUrl(book.cover) ? 'background-image: url(' + book.cover + ')' : ''}>
+    <span class="title">{book.title || ''}</span>
+    <span class="author">{book.author || ''}</span>
+  </span>
 </a>
