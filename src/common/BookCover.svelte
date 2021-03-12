@@ -1,10 +1,37 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
   export let book = {};
 
+  const dispatch = createEventDispatcher();
   function isValidUrl(url) {
     return url && /http.+\.(jpg|png|gif)$/.test(url);
   }
+
+  const handleClick = (id) => alert("clicked book" + id);
 </script>
+
+<a
+  href="#"
+  class="book book--interactive book--variation-{book.variation}
+  {isValidUrl(
+    book.cover
+  )
+    ? 'book--cover'
+    : 'book--no-cover'}"
+  on:click={() => dispatch('book-select', { id: book.id })}
+>
+  <span
+    class="cover"
+    style={isValidUrl(book.cover)
+      ? "background-image: url(" + book.cover + ")"
+      : ""}
+  >
+    <span class="title">{isValidUrl(book.cover) ? "" : book.title || ""}</span>
+    <span class="author">{isValidUrl(book.cover) ? "" : book.author || ""}</span
+    >
+  </span>
+</a>
 
 <style>
   .book {
@@ -93,15 +120,3 @@
     margin-left: calc(10% + var(--spacingSmall));
   }
 </style>
-
-<a
-  href="#"
-  class="book book--interactive book--variation-{book.variation}
-  {isValidUrl(book.cover) ? 'book--cover' : 'book--no-cover'}">
-  <span
-    class="cover"
-    style={isValidUrl(book.cover) ? 'background-image: url(' + book.cover + ')' : ''}>
-    <span class="title">{isValidUrl(book.cover) ?  '' : book.title || ''}</span>
-    <span class="author">{isValidUrl(book.cover) ? '' : book.author || ''}</span>
-  </span>
-</a>
